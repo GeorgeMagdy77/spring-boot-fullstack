@@ -1,0 +1,23 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "george15-api",
+      "image": "george15/george15-api:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:postgresql://awseb-e-d8stp2pwax-stack-awsebrdsdatabase-e0kc29ee9ayd.cjougcagioxj.us-east-1.rds.amazonaws.com:5432/customer"
+        }
+      ]
+    }
+  ]
+}
