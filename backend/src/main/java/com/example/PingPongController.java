@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 // This class is for us to test that Continuous Delivery (Deployment with Elastic Beanstalk) is working fine
 
+
 @RestController
 public class PingPongController {
 
