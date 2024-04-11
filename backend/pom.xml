@@ -13,14 +13,12 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>spring-boot-example</name>
 	<description>Demo project for Spring Boot</description>
-	<organization>
-		<name>george15</name>
-		<url>https://george15.com</url>
-	</organization>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<docker.username>george15</docker.username>
+		<docker.image.name>george15-api</docker.image.name>
+		<docker.image.tag/>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -182,7 +180,8 @@
 						</platforms>
 					</from>
 					<to>
-						<image>docker.io/${organization.name}/${project.artifactId}:${project.version}</image>
+						<image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
+<!--						image tag will be the build number that we generated (date command)-->
 						<tags>
 							<tag>latest</tag>
 						</tags>
