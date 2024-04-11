@@ -58,6 +58,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
+
       - name: Set build number # Generate a build number
         id: build-number   # Give this step ID as other steps will refer to it later at line 51 , 57 and 78
         run: echo "BUILD_NUMBER=$(date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_OUTPUT  # Take the output of echo and put it inside environment file
