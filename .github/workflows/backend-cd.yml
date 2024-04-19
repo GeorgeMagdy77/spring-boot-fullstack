@@ -134,6 +134,7 @@ jobs:
             --data '{"text":"Deployment and commit completed :github-check-mark: :party_blob: - http://george15-api-env.eba-gmzptems.us-east-1.elasticbeanstalk.com/"}' 
             ${{ secrets.SLACK_WEBHOOK_URL }}
 
+
       - name: Send Slack Message
         if: always()
         run: >
