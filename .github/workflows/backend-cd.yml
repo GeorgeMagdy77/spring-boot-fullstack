@@ -32,6 +32,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3   #Checkout the repository (code) into the linux runner (VM)
 
+      - name: Slack commit message and sha
+        run: >
+          curl -X POST -H 'Content-type: application/json'
+          --data '{"text":":github: https://github.com/GeorgeMagdy77/spring-boot-fullstack/commit/${{ github.sha }} - ${{ github.event.head_commit.message }}"}' 
+          ${{ secrets.SLACK_WEBHOOK_URL }}
+
+
       - name: Send Slack Message
         run: >
           curl -X POST -H 'Content-type: application/json'
