@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.customer.Customer;
 import com.example.customer.CustomerRepository;
+import com.example.customer.Gender;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,11 +29,14 @@ public class SpringBootExampleApplication {
 			 String firstName = name.firstName();
 			 String lastName = name.lastName();
 			 int age = random.nextInt(16, 99);
+			 Gender gender = age%2==0 ? Gender.MALE : Gender.FEMALE;
 			 String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@george.com";
+
 			 Customer customer = new Customer(
 					 firstName +  " " + lastName,
 					 email,
-					 age);
+					 age,
+					 gender);
 			 customerRepository.save(customer);
 		 };
 	 }

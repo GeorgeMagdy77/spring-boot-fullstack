@@ -49,6 +49,7 @@ const App = () => {
                     <WrapItem key={index}>
                         <CardWithImage
                             {...customer}  // getting all customer properties instead of writing each property
+                            imageNumber={index}
                         />
                     </WrapItem>
                 ))}

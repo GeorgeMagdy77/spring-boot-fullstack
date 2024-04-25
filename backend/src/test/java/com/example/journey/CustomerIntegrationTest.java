@@ -4,6 +4,7 @@ package com.example.journey;
 import com.example.customer.Customer;
 import com.example.customer.CustomerRegistrationRequest;
 import com.example.customer.CustomerUpdateRequest;
+import com.example.customer.Gender;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,6 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 
 ///-------------------This file tests Multiple EndPoints for Customer, So That it is named Customer Journey (CRUD)-----------------///
@@ -49,11 +49,13 @@ public class CustomerIntegrationTest {
         Name fakerName = faker.name();
 
         String name = fakerName.fullName();
-        String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
+        String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@george.com";
         int age = RANDOM.nextInt(1, 100);
 
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
 
         // send a post request instead of postman
@@ -80,7 +82,7 @@ public class CustomerIntegrationTest {
                 .getResponseBody();
 
         // make sure that customer is present
-        Customer expectedCustomer = new Customer(name , email , age);
+        Customer expectedCustomer = new Customer(name , email , age, gender);
 
         assertThat(allCustomers).usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                 .contains(expectedCustomer);
@@ -115,11 +117,13 @@ public class CustomerIntegrationTest {
         Name fakerName = faker.name();
 
         String name = fakerName.fullName();
-        String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
+        String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@george.com";
         int age = RANDOM.nextInt(1, 100);
 
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
 
         // send a post request
@@ -177,11 +181,13 @@ public class CustomerIntegrationTest {
         Name fakerName = faker.name();
 
         String name = fakerName.fullName();
-        String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
+        String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@george.com";
         int age = RANDOM.nextInt(1, 100);
 
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
 
         // send a post request
@@ -243,7 +249,7 @@ public class CustomerIntegrationTest {
                 .getResponseBody();
 
         Customer expectedCustomer = new Customer(
-                id, newName, email, age
+                id, newName, email, age, gender
         );
 
         assertThat(updatedCustomer).isEqualTo(expectedCustomer);

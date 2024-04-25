@@ -19,7 +19,8 @@ public class CustomeListDataAccessService implements CustomerDao{
                 1,
                 "Alex",
                 "alex@gmail.com",
-                21
+                21,
+                Gender.MALE
         );
         customers.add(alex);
 
@@ -27,7 +28,8 @@ public class CustomeListDataAccessService implements CustomerDao{
                 2,
                 "Jamila",
                 "jamila@gmail.com",
-                19
+                19,
+                Gender.FEMALE
         );
         customers.add(jamila);
     }
@@ -68,6 +70,13 @@ public class CustomeListDataAccessService implements CustomerDao{
     @Override
     public void updateCustomer(Customer update) {
         customers.add(update);
+    }
+
+    @Override
+    public Optional<Customer> selectCustomerByEmail(String email) {
+        return customers.stream()
+                .filter(c -> c.getName().equals(email))
+                .findFirst();
     }
 
 

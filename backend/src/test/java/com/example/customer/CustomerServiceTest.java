@@ -47,7 +47,7 @@ class CustomerServiceTest {
     void canGetCustomer() {
         //Given
         int id = 10;
-        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22);
+        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22, Gender.MALE);
 
         // tell the Mock customerDao what to do when calling selectCustomerById please return Optional customer whether it is empty or George as it doesn't know to how reply
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -85,7 +85,7 @@ class CustomerServiceTest {
         // tell the Mock customerDao what to do when calling isPersonExistWithEmail please return false when given email with value "george@gmail.com" as it doesn't know to how reply
         when(customerDao.isPersonExistWithEmail(email)).thenReturn(false);
 
-        CustomerRegistrationRequest request = new CustomerRegistrationRequest("george" ,email , 22);
+        CustomerRegistrationRequest request = new CustomerRegistrationRequest("george" ,email , 22, Gender.MALE);
 
         //When
         underTest.addCustomer(request);
@@ -118,7 +118,7 @@ class CustomerServiceTest {
         // tell the Mock customerDao what to do when calling isPersonExistWithEmail please return true when given email with value "george@gmail.com" as it doesn't know to how reply
         when(customerDao.isPersonExistWithEmail(email)).thenReturn(true);
 
-        CustomerRegistrationRequest request = new CustomerRegistrationRequest("george" ,email , 22);
+        CustomerRegistrationRequest request = new CustomerRegistrationRequest("george" ,email , 22, Gender.MALE);
 
         //When
         assertThatThrownBy(() -> underTest.addCustomer(request))
@@ -170,7 +170,7 @@ class CustomerServiceTest {
     void canUpdateAllCustomersProperties() {
         //Given
         int id = 10;
-        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22);
+        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22, Gender.MALE);
 
         // tell the Mock customerDao what to do when calling selectCustomerById please return Optional customer whether it is empty or George as it doesn't know to how reply
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -206,7 +206,7 @@ class CustomerServiceTest {
     void canUpdateOnlyCustomerName() {
         //Given
         int id = 10;
-        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22);
+        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22, Gender.MALE);
 
         // tell the Mock customerDao what to do when calling selectCustomerById please return Optional customer whether it is empty or George as it doesn't know to how reply
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -236,7 +236,7 @@ class CustomerServiceTest {
     void canUpdateOnlyCustomerEmail() {
         //Given
         int id = 10;
-        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22);
+        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22, Gender.MALE);
 
         // tell the Mock customerDao what to do when calling selectCustomerById please return Optional customer whether it is empty or George as it doesn't know to how reply
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -271,7 +271,7 @@ class CustomerServiceTest {
     void canUpdateOnlyCustomerAge() {
         //Given
         int id = 10;
-        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22);
+        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22, Gender.MALE);
 
         // tell the Mock customerDao what to do when calling selectCustomerById please return Optional customer whether it is empty or George as it doesn't know to how reply
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -301,7 +301,7 @@ class CustomerServiceTest {
     void willThrowWhenTryingToUpdateCustomerEmailWhenAlreadyTaken() {
         //Given
         int id = 10;
-        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22);
+        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22, Gender.MALE);
 
         // tell the Mock customerDao what to do when calling selectCustomerById please return Optional customer whether it is empty or George as it doesn't know to how reply
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -329,7 +329,7 @@ class CustomerServiceTest {
     void willThrowWhenCustomerHasNoChanges() {
         //Given
         int id = 10;
-        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22);
+        Customer customer = new Customer(id , "George" , "george@gmail.com" , 22, Gender.MALE);
 
         // tell the Mock customerDao what to do when calling selectCustomerById please return Optional customer whether it is empty or George as it doesn't know to how reply
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
