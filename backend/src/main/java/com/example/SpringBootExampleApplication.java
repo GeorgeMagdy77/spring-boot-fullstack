@@ -30,7 +30,7 @@ public class SpringBootExampleApplication {
 			 String lastName = name.lastName();
 			 int age = random.nextInt(16, 99);
 			 Gender gender = age%2==0 ? Gender.MALE : Gender.FEMALE;
-			 String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@george.com";
+			 String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gmail.com";
 
 			 Customer customer = new Customer(
 					 firstName +  " " + lastName,
