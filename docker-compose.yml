@@ -6,13 +6,14 @@ services:
       POSTGRES_USER: george
       POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
-    volumes: # how to store data
+    volumes: #how to store data
       - db:/data/postgres
     ports:
-      - "5432:5432" # port 5432[localhost , can be random port] ---> mapping to ---> 5432[actual instance running inside the container] (requests from localhost will be redirected to on the container)
+      - "5432:5432"   #port 5432[localhost , can be random port] ---> mapping to ---> 5432[actual instance running inside the container listen on port 5432] (requests from localhost will be redirected to on the container)
     networks:
       - db
     restart: unless-stopped
+
 
   george15-api:
       container_name: george15-api
@@ -24,8 +25,22 @@ services:
       networks:
       - db
       depends_on:
-      - db  #  we don't want to start george15-api container unless db (database) container is up and running
+      - db  #we don't want to start george15-api container unless db (database) container is up and running
       restart: unless-stopped
+
+
+  george15-react:
+    container_name: george15-react
+    image: george15/george15-react
+    build:
+      context: frontend/react   #build the image from the docker file instead of pulling the image from dockerhub , so /frontend/react is where to find the docker file
+      args:
+        api_base_url: http://localhost:8088
+    ports:
+      - "3000:5173"   #port 3000[localhost e.g.(Google Chrome) , can be random port] ---> mapping to ---> 5173[actual instance running inside the container listen on port 5173] (requests from localhost will be redirected to inside the container)
+    depends_on:
+      - george15-api  #we don't want to start george15-react container unless george15-api container is up and running
+    restart: unless-stopped
 
 networks:
   db:

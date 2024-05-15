@@ -1,39 +1,44 @@
-import { Wrap , WrapItem , Spinner , Text } from '@chakra-ui/react'
+import {
+    Wrap,
+    WrapItem,
+    Spinner,
+    Text
+} from '@chakra-ui/react';
 import SidebarWithHeader from "./components/shared/SideBar.jsx";
-import {useEffect , useState} from "react";
-import {getCustomers} from "./services/client.js";
-import CardWithImage from "./components/CustomerCard.jsx";
-import CreateCustomerDrawer from "./components/CreateCustomerDrawer.jsx";
+import { useEffect, useState } from 'react';
+import { getCustomers } from "./services/client.js";
 import {errorNotification} from "./services/notification.js";
+import CreateCustomerDrawer from "./components/CreateCustomerDrawer.jsx";
+import CardWithImage from "./components/CustomerCard.jsx";
 
 const App = () => {
 
-    const[customers , setCustomers] = useState([]);
-    const[loading , setLoading] = useState(false);
-    const[err , setError] = useState("");
+    const [customers, setCustomers] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [err, setError] = useState("");
 
     const fetchCustomers = () => {
         setLoading(true);
-        getCustomers().then(response=> {
-            setCustomers(response.data)
+        getCustomers().then(res => {
+            setCustomers(res.data)
         }).catch(err => {
             setError(err.response.data.message)
             errorNotification(
                 err.code,
                 err.response.data.message
-            );
-        }).finally( () => {
-            setLoading(false) // this will be executed regardless whether it fails or not
+            )
+        }).finally(() => {
+            setLoading(false)
         })
     }
 
     useEffect(() => {
         fetchCustomers();
-    },[])
+    }, [])
 
-    if(loading){
-       return (
-           <SidebarWithHeader>
+    if (loading) {
+        return (
+            <SidebarWithHeader>
                 <Spinner
                     thickness='4px'
                     speed='0.65s'
@@ -41,11 +46,11 @@ const App = () => {
                     color='blue.500'
                     size='xl'
                 />
-           </SidebarWithHeader>
-       )
+            </SidebarWithHeader>
+        )
     }
 
-    if(err){
+    if (err) {
         return (
             <SidebarWithHeader>
                 <CreateCustomerDrawer
@@ -56,7 +61,7 @@ const App = () => {
         )
     }
 
-    if(customers.length <= 0){
+    if(customers.length <= 0) {
         return (
             <SidebarWithHeader>
                 <CreateCustomerDrawer
@@ -76,9 +81,9 @@ const App = () => {
                 {customers.map((customer, index) => (
                     <WrapItem key={index}>
                         <CardWithImage
-                            fetchCustomers={fetchCustomers}
-                            {...customer}  // getting all customer properties instead of writing each property
+                            {...customer}
                             imageNumber={index}
+                            fetchCustomers={fetchCustomers}
                         />
                     </WrapItem>
                 ))}

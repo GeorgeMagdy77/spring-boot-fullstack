@@ -1,4 +1,4 @@
-const UserProfile = ({name , age ,gender , ...props}) => {
+const UserProfile = ({name, age, gender, ...props}) => {
     return (
         <div>
             <h1>{name}</h1>

@@ -11,9 +11,9 @@ ReactDOM
     .createRoot(document.getElementById('root'))
     .render(
         <React.StrictMode>
-                <ChakraProvider>
-                        <App/>
-                        <ToastContainer/>
-                </ChakraProvider>
-        </React.StrictMode>,
-)
+            <ChakraProvider>
+                <App/>
+                <ToastContainer/>
+            </ChakraProvider>
+        </React.StrictMode>
+    )

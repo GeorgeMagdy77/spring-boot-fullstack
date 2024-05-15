@@ -14,9 +14,8 @@ import CreateCustomerForm from "./CreateCustomerForm.jsx";
 const AddIcon = () => "+";
 const CloseIcon = () => "x";
 
-const CreateCustomerDrawer = ({fetchCustomers}) => {
+const CreateCustomerDrawer = ({ fetchCustomers }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-
     return <>
         <Button
             leftIcon={<AddIcon/>}
@@ -25,7 +24,6 @@ const CreateCustomerDrawer = ({fetchCustomers}) => {
         >
             Create customer
         </Button>
-
         <Drawer isOpen={isOpen} onClose={onClose} size={"xl"}>
             <DrawerOverlay />
             <DrawerContent>
@@ -34,7 +32,7 @@ const CreateCustomerDrawer = ({fetchCustomers}) => {
 
                 <DrawerBody>
                     <CreateCustomerForm
-                        fetchCustomers={fetchCustomers}
+                        onSuccess={fetchCustomers}
                     />
                 </DrawerBody>
 
@@ -42,15 +40,14 @@ const CreateCustomerDrawer = ({fetchCustomers}) => {
                     <Button
                         leftIcon={<CloseIcon/>}
                         colorScheme={"teal"}
-                        onClick={onClose}
-                    >
+                        onClick={onClose}>
                         Close
                     </Button>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
-
     </>
+
 }
 
 export default CreateCustomerDrawer;

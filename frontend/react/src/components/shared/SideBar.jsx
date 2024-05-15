@@ -1,56 +1,83 @@
-'use client'
-
+import React from 'react';
 import {
-    IconButton,
     Avatar,
     Box,
     CloseButton,
-    Flex,
-    HStack,
-    VStack,
-    Icon,
-    useColorModeValue,
-    Text,
     Drawer,
     DrawerContent,
-    useDisclosure,
+    Flex,
+    HStack,
+    Icon,
+    IconButton,
+    Link,
     Menu,
     MenuButton,
     MenuDivider,
     MenuItem,
     MenuList,
+    Text,
+    useColorModeValue,
+    useDisclosure,
+    VStack,
     Image
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+
 import {
-    FiHome,
-    FiTrendingUp,
-    FiCompass,
-    FiStar,
-    FiSettings,
-    FiMenu,
     FiBell,
     FiChevronDown,
-} from 'react-icons/fi'
-
-
-
+    FiCompass,
+    FiHome,
+    FiMenu,
+    FiSettings,
+    FiStar,
+    FiTrendingUp
+} from 'react-icons/fi';
 
 const LinkItems = [
-    { name: 'Home', icon: FiHome },
-    { name: 'Trending', icon: FiTrendingUp },
-    { name: 'Explore', icon: FiCompass },
-    { name: 'Favourites', icon: FiStar },
-    { name: 'Settings', icon: FiSettings },
-]
+    {name: 'Home', icon: FiHome},
+    {name: 'Trending', icon: FiTrendingUp},
+    {name: 'Explore', icon: FiCompass},
+    {name: 'Favourites', icon: FiStar},
+    {name: 'Settings', icon: FiSettings},
+];
 
-const SidebarContent = ({ onClose, ...rest }) => {
+export default function SidebarWithHeader({children}) {
+    const {isOpen, onOpen, onClose} = useDisclosure();
+    return (
+        <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+            <SidebarContent
+                onClose={() => onClose}
+                display={{base: 'none', md: 'block'}}
+            />
+            <Drawer
+                autoFocus={false}
+                isOpen={isOpen}
+                placement="left"
+                onClose={onClose}
+                returnFocusOnClose={false}
+                onOverlayClick={onClose}
+                size="full">
+                <DrawerContent>
+                    <SidebarContent onClose={onClose}/>
+                </DrawerContent>
+            </Drawer>
+            {/* mobilenav */}
+            <MobileNav onOpen={onOpen}/>
+            <Box ml={{base: 0, md: 60}} p="4">
+                {children}
+            </Box>
+        </Box>
+    );
+}
+
+const SidebarContent = ({onClose, ...rest}) => {
     return (
         <Box
             transition="3s ease"
             bg={useColorModeValue('white', 'gray.900')}
             borderRight="1px"
             borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-            w={{ base: 'full', md: 60 }}
+            w={{base: 'full', md: 60}}
             pos="fixed"
             h="full"
             {...rest}>
@@ -64,7 +91,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
                     src='https://user-images.githubusercontent.com/40702606/210880158-e7d698c2-b19a-4057-b415-09f48a746753.png'
                     alt='Amigoscode'
                 />
-                <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
+                <CloseButton display={{base: 'flex', md: 'none'}} onClick={onClose}/>
             </Flex>
             {LinkItems.map((link) => (
                 <NavItem key={link.name} icon={link.icon}>
@@ -72,16 +99,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
                 </NavItem>
             ))}
         </Box>
-    )
-}
+    );
+};
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({icon, children, ...rest}) => {
     return (
-        <Box
-            as="a"
-            href="#"
-            style={{ textDecoration: 'none' }}
-            _focus={{ boxShadow: 'none' }}>
+        <Link href="#" style={{textDecoration: 'none'}} _focus={{boxShadow: 'none'}}>
             <Flex
                 align="center"
                 p="4"
@@ -90,7 +113,7 @@ const NavItem = ({ icon, children, ...rest }) => {
                 role="group"
                 cursor="pointer"
                 _hover={{
-                    bg: 'red.400',
+                    bg: 'cyan.400',
                     color: 'white',
                 }}
                 {...rest}>
@@ -106,43 +129,51 @@ const NavItem = ({ icon, children, ...rest }) => {
                 )}
                 {children}
             </Flex>
-        </Box>
-    )
-}
+        </Link>
+    );
+};
 
-const MobileNav = ({ onOpen, ...rest }) => {
+const MobileNav = ({onOpen, ...rest}) => {
     return (
         <Flex
-            ml={{ base: 0, md: 60 }}
-            px={{ base: 4, md: 4 }}
+            ml={{base: 0, md: 60}}
+            px={{base: 4, md: 4}}
             height="20"
             alignItems="center"
             bg={useColorModeValue('white', 'gray.900')}
             borderBottomWidth="1px"
             borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
-            justifyContent={{ base: 'space-between', md: 'flex-end' }}
+            justifyContent={{base: 'space-between', md: 'flex-end'}}
             {...rest}>
             <IconButton
-                display={{ base: 'flex', md: 'none' }}
+                display={{base: 'flex', md: 'none'}}
                 onClick={onOpen}
                 variant="outline"
                 aria-label="open menu"
-                icon={<FiMenu />}
+                icon={<FiMenu/>}
             />
 
             <Text
-                display={{ base: 'flex', md: 'none' }}
+                display={{base: 'flex', md: 'none'}}
                 fontSize="2xl"
                 fontFamily="monospace"
                 fontWeight="bold">
                 Logo
             </Text>
 
-            <HStack spacing={{ base: '0', md: '6' }}>
-                <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
+            <HStack spacing={{base: '0', md: '6'}}>
+                <IconButton
+                    size="lg"
+                    variant="ghost"
+                    aria-label="open menu"
+                    icon={<FiBell/>}
+                />
                 <Flex alignItems={'center'}>
                     <Menu>
-                        <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
+                        <MenuButton
+                            py={2}
+                            transition="all 0.3s"
+                            _focus={{boxShadow: 'none'}}>
                             <HStack>
                                 <Avatar
                                     size={'sm'}
@@ -151,7 +182,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                                     }
                                 />
                                 <VStack
-                                    display={{ base: 'none', md: 'flex' }}
+                                    display={{base: 'none', md: 'flex'}}
                                     alignItems="flex-start"
                                     spacing="1px"
                                     ml="2">
@@ -160,8 +191,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
                                         Admin
                                     </Text>
                                 </VStack>
-                                <Box display={{ base: 'none', md: 'flex' }}>
-                                    <FiChevronDown />
+                                <Box display={{base: 'none', md: 'flex'}}>
+                                    <FiChevronDown/>
                                 </Box>
                             </HStack>
                         </MenuButton>
@@ -171,40 +202,12 @@ const MobileNav = ({ onOpen, ...rest }) => {
                             <MenuItem>Profile</MenuItem>
                             <MenuItem>Settings</MenuItem>
                             <MenuItem>Billing</MenuItem>
-                            <MenuDivider />
+                            <MenuDivider/>
                             <MenuItem>Sign out</MenuItem>
                         </MenuList>
                     </Menu>
                 </Flex>
             </HStack>
         </Flex>
-    )
-}
-
-const SidebarWithHeader = ({children}) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-
-    return (
-        <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-            <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
-            <Drawer
-                isOpen={isOpen}
-                placement="left"
-                onClose={onClose}
-                returnFocusOnClose={false}
-                onOverlayClick={onClose}
-                size="full">
-                <DrawerContent>
-                    <SidebarContent onClose={onClose} />
-                </DrawerContent>
-            </Drawer>
-            {/* mobilenav */}
-            <MobileNav onOpen={onOpen} />
-            <Box ml={{ base: 0, md: 60 }} p="4">
-                {children}
-            </Box>
-        </Box>
-    )
-}
-
-export default SidebarWithHeader
+    );
+};

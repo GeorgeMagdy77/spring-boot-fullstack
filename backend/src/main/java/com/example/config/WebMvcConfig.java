@@ -8,6 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
+// This class is to allow the backend running on port 8080 to accept requests from frontend running on port 5173
+
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -23,6 +25,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
         allowedOrigins.forEach(corsRegistration::allowedOrigins);
         allowedMethods.forEach(corsRegistration::allowedMethods);
     }
-
 
 }

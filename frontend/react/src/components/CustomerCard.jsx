@@ -16,11 +16,10 @@ import {
 } from '@chakra-ui/react';
 
 import {useRef} from 'react'
-
 import {deleteCustomer} from "../services/client.js";
 import {errorNotification, successNotification} from "../services/notification.js";
-import UpdateCustomerDrawer from "./UpdateCustomerDrawer.jsx";
 
+import UpdateCustomerDrawer from "./UpdateCustomerDrawer.jsx";
 
 export default function CardWithImage({id, name, email, age, gender, imageNumber, fetchCustomers}) {
     const randomUserGender = gender === "MALE" ? "men" : "women";
@@ -50,9 +49,7 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
                 <Flex justify={'center'} mt={-12}>
                     <Avatar
                         size={'xl'}
-                        src={
-                            `https://randomuser.me/api/portraits/${randomUserGender}/${imageNumber}.jpg`
-                        }
+                        src={`https://randomuser.me/api/portraits/${randomUserGender}/${imageNumber}.jpg`}
                         alt={'Author'}
                         css={{
                             border: '2px solid white',
@@ -73,9 +70,9 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
                 <Stack direction={'row'} justify={'center'} spacing={6} p={4}>
                     <Stack>
                         <UpdateCustomerDrawer
-                            fetchCustomers={fetchCustomers}
                             initialValues={{ name, email, age }}
                             customerId={id}
+                            fetchCustomers={fetchCustomers}
                         />
                     </Stack>
                     <Stack>
@@ -87,9 +84,9 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
                                 transform: 'translateY(-2px)',
                                 boxShadow: 'lg'
                             }}
-                            _focus={{
-                                bg: 'green.500'
-                            }}
+                            // _focus={{
+                            //     bg: 'green.500'
+                            // }}
                             onClick={onOpen}
                         >
                             Delete

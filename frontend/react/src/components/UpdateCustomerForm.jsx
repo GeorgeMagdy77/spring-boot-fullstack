@@ -1,6 +1,6 @@
-import {Form, Formik, useField} from 'formik';
-import * as Yup from 'yup';
-import {Alert, AlertIcon, Box, Button, FormLabel, Input, Select, Stack} from "@chakra-ui/react";
+import {Form, Formik, useField} from "formik";
+import * as Yup from "yup";
+import {Alert, AlertIcon, Box, Button, FormLabel, Input, Stack} from "@chakra-ui/react";
 import {updateCustomer} from "../services/client.js";
 import {errorNotification, successNotification} from "../services/notification.js";
 
@@ -8,7 +8,7 @@ import {errorNotification, successNotification} from "../services/notification.j
 const MyTextInput = ({label, ...props}) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
     // which we can spread on <input>. We can use field meta to show an error
-    // message if the field is invalid and it has been touched (i.e. visited)
+    // message if the field is invalid, it has been touched (i.e. visited)
     const [field, meta] = useField(props);
     return (
         <Box>
@@ -86,7 +86,7 @@ const UpdateCustomerForm = ({ fetchCustomers, initialValues, customerId }) => {
                                 type="number"
                                 placeholder="20"
                             />
-
+                            // dirty tell us whether the values have changed from the initial values
                             <Button disabled={!(isValid && dirty) || isSubmitting} type="submit">Submit</Button>
                         </Stack>
                     </Form>
