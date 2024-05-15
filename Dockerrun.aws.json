@@ -15,7 +15,7 @@
     },
     {
       "name": "george15-api",
-      "image": "george15/george15-api:latest",
+      "image": "george15/george15-api:15.05.2024.21.21.33",
       "essential": true,
       "memory": 512,
       "portMappings": [
