@@ -15,4 +15,4 @@ CMD ["npm", "run", "dev"]
 # What we are doing here in this file is basically packaging up the folder react (everything within it) into
 # a container based of the node image version 19 alpine then we are going to copy all of our code ignoring
 # the dockerfile as well as node_modules and .env into the /app Directory
-# So with this file we can create a Docker Image and then from that image run the container
+# So with this file we can create a Docker Image and then from that image run the container.
