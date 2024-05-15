@@ -42,6 +42,7 @@ services:
       - george15-api  #we don't want to start george15-react container unless george15-api container is up and running
     restart: unless-stopped
 
+
 networks:
   db:
     driver: bridge
