@@ -11,7 +11,6 @@ import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import java.util.Random;
 
-
 @SpringBootApplication
 
 public class SpringBootExampleApplication {

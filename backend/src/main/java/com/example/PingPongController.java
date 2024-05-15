@@ -16,4 +16,5 @@ public class PingPongController {
     public PingPong getPingPong() {
         return new PingPong("Pong: %s".formatted(++COUNTER));
     }
+
 }
